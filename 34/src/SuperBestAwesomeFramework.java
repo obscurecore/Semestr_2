@@ -20,7 +20,7 @@ public class SuperBestAwesomeFramework {
 
 
     public static <T> List<SimpleStudent> getMany(Class<T> aClass, int count, Object... params) throws NoSuchFieldException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-
+// case when aclass has const with 2 params
 /*
         Class<?> c = Class.forName("aClass");
         SimpleStudent []arr = new SimpleStudent[100];
@@ -37,17 +37,19 @@ public class SuperBestAwesomeFramework {
 
         }
         */
-SimpleStudent []arr = new SimpleStudent[100];
-        Class<?> c = Class.forName("aClass");
+
+
+        //Case when aclass has const with only 1 params and the field will be open to set if 0 params so implements as close field
+        Class<?> c = aClass;
+        SimpleStudent[] arr = new SimpleStudent[100];
         List<SimpleStudent> list = new ArrayList<>();
         Constructor<?> cons = null;
+
         cons = c.getConstructor(String.class);
         Field f = c.getDeclaredField("age");
         f.setAccessible(true);
         for (int i = 0; i < count; i++) {
-
             arr[i] = null;
-
             arr[i] = (SimpleStudent) cons.newInstance(params[0]);
             f.set(arr[i], params[1]);
 
@@ -56,4 +58,3 @@ SimpleStudent []arr = new SimpleStudent[100];
         }
         return list;
     }
-}
