@@ -21,16 +21,37 @@ public class SuperBestAwesomeFramework {
 
     public static <T> List<SimpleStudent> getMany(Class<T> aClass, int count, Object... params) throws NoSuchFieldException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 
-
+/*
         Class<?> c = Class.forName("aClass");
+        SimpleStudent []arr = new SimpleStudent[100];
+
         List<SimpleStudent> list = new ArrayList<>();
         Constructor<?> cons = null;
         cons = c.getConstructor(String.class, Integer.class);
-        SimpleStudent object = null;
 
         for (int i = 0; i < count; i++) {
-            object = (SimpleStudent) cons.newInstance(params[0],params[1]);
-            list.add((SimpleStudent) object);
+            SimpleStudent arr[i] = null;
+
+            arr[i] = (SimpleStudent) cons.newInstance(params[0],params[1]);
+            list.add((SimpleStudent) arr[i]);
+
+        }
+        */
+SimpleStudent []arr = new SimpleStudent[100];
+        Class<?> c = Class.forName("aClass");
+        List<SimpleStudent> list = new ArrayList<>();
+        Constructor<?> cons = null;
+        cons = c.getConstructor(String.class);
+        Field f = c.getDeclaredField("age");
+        f.setAccessible(true);
+        for (int i = 0; i < count; i++) {
+
+            arr[i] = null;
+
+            arr[i] = (SimpleStudent) cons.newInstance(params[0]);
+            f.set(arr[i], params[1]);
+
+            list.add((SimpleStudent) arr[i]);
 
         }
         return list;
