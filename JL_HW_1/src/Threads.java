@@ -32,6 +32,9 @@ public class Threads implements Runnable {
             writeChannel.transferFrom(readChannel, 0, Long.MAX_VALUE);        } catch (IOException e) {
             e.printStackTrace();
         }
+        readChannel.close();
+        writeChannel.close();
+        
     }
 
 
